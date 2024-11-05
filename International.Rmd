@@ -12,8 +12,7 @@ library(lubridate)
 ```
 
 ```{r}
-OECDStats <- fread("OECD.ITF,DSD_INDICATORS@DF_SAFETY,1.0+.A..10P9VEHKM.....csv")
-OECDStats[, c("STRUCTURE_ID", "STRUCTURE", "STRUCTURE_NAME", "ACTION", "FREQ", "MEASURE", "UNIT_MEASURE" , "TRANSPORT_MODE", "VEHICLE_TYPE", "Vehicle type", "PRICE_BASE", "Price base", "INFRASTRUCTURE_TYPE", "Infrastructure type", "Transport mode", "Time period" , "Observation value", "OBS_STATUS2", "Observation status2", "UNIT_MULT", "Unit multiplier", "Decimals", "DECIMALS") := NULL]
+OECDStats <- fread("RubyMotoringIndex/OECDInternationalFatalities.csv")
 ```
 
 ```{r}

@@ -10,6 +10,7 @@ library(data.table)
 library(ggplot2)
 library(patchwork)
 library(lubridate)
+setwd("~/Documents/Documents - Ruby's MacBook Air/RAC Work/MotoringIndex/RubyMotoringIndex")
 ```
 
 #Read files

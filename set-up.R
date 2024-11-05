@@ -1,188 +1,81 @@
-AnnualPay2020 <- fread("~/Documents/Documents - Ruby's MacBook Air/RAC Work/MotoringIndex/table32020revised/Work Region Occupation SOC10 (2) Table 3.7a   Annual pay - Gross 2020.csv")
-HoursWorked2020 <- fread("~/Documents/Documents - Ruby's MacBook Air/RAC Work/MotoringIndex/table32020revised/Work Region Occupation SOC10 (2) Table 3.9a   Paid hours worked - Total 2020.csv")
-HourlyPay2020 <- fread("~/Documents/Documents - Ruby's MacBook Air/RAC Work/MotoringIndex/table32020revised/Work Region Occupation SOC10 (2) Table 3.5a   Hourly pay - Gross 2020.csv")
-WeeklyPay2020 <- fread("~/Documents/Documents - Ruby's MacBook Air/RAC Work/MotoringIndex/table32020revised/Work Region Occupation SOC10 (2) Table 3.1a   Weekly pay - Gross 2020.csv")
+AnnualPay2020 <- fread("table32020revised/AnnualPay2020.csv")
+HourlyPay2020 <- fread("table32020revised/HourlyPay2020.csv")
+WeeklyPay2020 <- fread("table32020revised/WeeklyPay2020.csv")
+HoursWorked2020 <- fread("table32020revised/HoursWorked2020.csv")
 
-setnames(WeeklyPay2020, c("V1", "V3", "V4", "V5", "V6", "V7", "V8", "V9", "V10", "V11", "V12", "V13", "V14", "V15", "V16", "V17"), c("Description", "Number of jobs","Median","Annual % change","Mean","Mean: Annual % change","10 percentile","20 percentile","25 percentile","30 percentile","40 percentile","50 percentile","60 percentile", "70 percentile","80 percentile","90 percentile"))
-WeeklyPay2020 <- WeeklyPay2020[, c("V2", "V18", "V19", "V20", "V21", "V22", "V23", "V24", "V25") := NULL]
+AnnualPay2021 <- fread("table32020revised/AnnualPay2021.csv")
+HourlyPay2021 <- fread("table32020revised/HourlyPay2021.csv")
+WeeklyPay2021 <- fread("table32020revised/WeeklyPay2021.csv")
+HoursWorked2021 <- fread("table32020revised/HoursWorked2021.csv")
 
-HoursWorked2020 <- HoursWorked2020[, c("V2", "V18", "V19", "V20", "V21", "V22", "V23", "V24", "V25") := NULL]
+AnnualPay2022 <- fread("table32020revised/AnnualPay2022.csv")
+HourlyPay2022 <- fread("table32020revised/HourlyPay2022.csv")
+WeeklyPay2022 <- fread("table32020revised/WeeklyPay2022.csv")
+HoursWorked2022 <- fread("table32020revised/HoursWorked2022.csv")
 
-AnnualPay2020 <- AnnualPay2020[, c("V2", "V18", "V19", "V20", "V21", "V22", "V23", "V24", "V25") := NULL]
+AnnualPay2023 <- fread("table32020revised/AnnualPay2023.csv")
+HourlyPay2023 <- fread("table32020revised/HourlyPay2023.csv")
+WeeklyPay2023 <- fread("table32020revised/WeeklyPay2023.csv")
+HoursWorked2023 <- fread("table32020revised/HoursWorked2023.csv")
 
-HourlyPay2020 <- HourlyPay2020[, c("V2", "V18", "V19", "V20", "V21", "V22", "V23", "V24", "V25") := NULL]
+WeeklyPay2024 <- fread("table32020revised/WeeklyPay2024.csv")
+HourlyPay2024 <- fread("table32020revised/HourlyPay2024.csv")
+AnnualPay2024 <- fread("table32020revised/AnnualPay2024.csv")
+HoursWorked2024 <- fread("table32020revised/HoursWorked2024.csv")
 
-setnames(HoursWorked2020, c("V1", "V3", "V4", "V5", "V6", "V7", "V8", "V9", "V10", "V11", "V12", "V13", "V14", "V15", "V16", "V17"), c("Description", "Number of jobs","Median","Annual % change","Mean","Mean: Annual % change","10 percentile","20 percentile","25 percentile","30 percentile","40 percentile","50 percentile","60 percentile", "70 percentile","80 percentile","90 percentile"))
-setnames(AnnualPay2020, c("V1", "V3", "V4", "V5", "V6", "V7", "V8", "V9", "V10", "V11", "V12", "V13", "V14", "V15", "V16", "V17"), c("Description", "Number of jobs","Median","Annual % change","Mean","Mean: Annual % change","10 percentile","20 percentile","25 percentile","30 percentile","40 percentile","50 percentile","60 percentile", "70 percentile","80 percentile","90 percentile"))
-setnames(HourlyPay2020, c("V1", "V3", "V4", "V5", "V6", "V7", "V8", "V9", "V10", "V11", "V12", "V13", "V14", "V15", "V16", "V17"), c("Description", "Number of jobs","Median","Annual % change","Mean","Mean: Annual % change","10 percentile","20 percentile","25 percentile","30 percentile","40 percentile","50 percentile","60 percentile", "70 percentile","80 percentile","90 percentile"))
+AnnualPay2020Regions <- AnnualPay2020[c(1, 35, 67, 102, 136, 168, 202, 236, 270, 304, 336, 369, 403),]
+AnnualPay2021Regions <- AnnualPay2021[c(1, 36, 68, 103, 136, 169, 202, 235, 267, 301, 335, 368, 402),]
+AnnualPay2022Regions <- AnnualPay2022[c(1, 37, 69, 102, 133, 165, 197, 231, 264, 297, 329, 360, 394),]
+AnnualPay2023Regions <- AnnualPay2023[c(1, 37, 67, 100, 133, 164, 197, 230, 262, 296, 329, 362, 395),]
+RegionsAnnual2024 <- AnnualPay2024[c(1, 37, 70, 105, 138, 172, 206, 239, 273, 308, 342, 373, 408),]
 
-HourlyPay2020 <- HourlyPay2020[6:426]
-AnnualPay2020 <- AnnualPay2020[6:426]
-HoursWorked2020 <- HoursWorked2020[6:426]
-WeeklyPay2020 <- WeeklyPay2020[6:426]
+WeeklyPay2020Regions <- WeeklyPay2020[c(1, 36, 69, 104, 138, 172, 206, 241, 276, 311, 343, 376, 411),]
+WeeklyPay2021Regions <- WeeklyPay2021[c(1, 36, 69, 104, 139, 174, 208, 243, 277, 312, 346, 379, 414),]
+WeeklyPay2022Regions <- WeeklyPay2022[c(1, 37, 70, 105, 139, 174, 209, 244, 279,314,349,382, 417),]
+WeeklyPay2023Regions <- WeeklyPay2023[c(1, 37, 70, 105, 138, 173, 207, 242, 277, 312, 347, 380, 415),]
+RegionsWeekly2024 <- WeeklyPay2024[c(1, 37, 70, 105, 140, 175, 209, 243, 278,313, 347,381, 416),]
 
-HourlyPay2020 <- HourlyPay2020[, Date := "2020-01-01"]
-AnnualPay2020 <- AnnualPay2020[, Date := "2020-01-01"]
-HoursWorked2020 <- HoursWorked2020[, Date := "2020-01-01"]
-WeeklyPay2020 <- WeeklyPay2020[, Date := "2020-01-01"]
+HourlyPay2020Regions <- HourlyPay2020[c(1, 36, 70, 105, 139,173, 207, 242, 277, 312,345, 379, 414),]
+HourlyPay2021Regions <- HourlyPay2021[c(1, 36, 69, 104, 139, 174, 208, 243, 277, 312, 347, 380, 415),]
+HourlyPay2022Regions <- HourlyPay2022[c(1, 37, 70, 105, 139, 174, 209, 244, 279, 314, 349, 382, 417),]
+HourlyPay2023Regions <- HourlyPay2023[c(1, 37, 70, 105, 139, 174, 208, 243, 278, 313, 348,382, 417),]
+RegionsHourly2024 <- HourlyPay2024[c(1, 37, 71, 106, 141, 176, 210, 244, 279, 314, 349, 383, 418),]
 
-AnnualPay2021 <- fread("Work Region Occupation SOC20 (2) Table 3.7a   Annual pay - Gross 2021.csv")
-HoursWorked2021 <- fread("Work Region Occupation SOC20 (2) Table 3.9a   Paid hours worked - Total 2021.csv")
-HourlyPay2021 <- fread("Work Region Occupation SOC20 (2) Table 3.5a   Hourly pay - Gross 2021.csv")
-WeeklyPay2021 <- fread("Work Region Occupation SOC20 (2) Table 3.1a   Weekly pay - Gross 2021.csv")
+HoursWorked2020Regions <- HoursWorked2020[c(1, 36, 70, 105, 139, 173, 208, 243, 278, 313, 348, 382, 417),]
+HoursWorked2021Regions <- HoursWorked2021[c(1, 37, 70, 105, 140, 175, 210, 245, 280, 315, 350, 383, 418),]
+HoursWorked2022Regions <- HoursWorked2022[c(1, 37, 68, 103, 136, 170, 204, 239, 273, 308, 342, 375, 408),]
+HoursWorked2023Regions <- HoursWorked2023[c(1, 37, 70, 105,139,174, 209,244, 279, 314,349, 382, 417),]
+RegionsHoursWorked2024 <- HoursWorked2024[c(1, 37, 70, 105, 140, 175, 210, 245, 280, 315, 349, 383, 418 ),]
 
-HourlyPay2021 <- HourlyPay2021[, Date := "2021-01-01"]
-AnnualPay2021 <- AnnualPay2021[, Date := "2021-01-01"]
-HoursWorked2021 <- HoursWorked2021[, Date := "2021-01-01"]
-WeeklyPay2021 <- WeeklyPay2021[, Date := "2021-01-01"]
-
-HourlyPay2021 <- HourlyPay2021[6:438]
-AnnualPay2021 <- AnnualPay2021[6:438]
-WeeklyPay2021 <- WeeklyPay2021[6:438]
-HoursWorked2021 <- HoursWorked2021[6:438]
-
-setnames(WeeklyPay2021, c("V1", "V3", "V4", "V5", "V6", "V7", "V8", "V9", "V10", "V11", "V12", "V13", "V14", "V15", "V16", "V17"), c("Description", "Number of jobs","Median","Annual % change","Mean","Mean: Annual % change","10 percentile","20 percentile","25 percentile","30 percentile","40 percentile","50 percentile","60 percentile", "70 percentile","80 percentile","90 percentile"))
-WeeklyPay2021 <- WeeklyPay2021[, c("V2", "V18", "V19", "V20", "V21", "V22", "V23", "V24", "V25") := NULL]
-HoursWorked2021 <- HoursWorked2021[, c("V2", "V18", "V19", "V20", "V21", "V22", "V23", "V24", "V25") := NULL]
-AnnualPay2021 <- AnnualPay2021[, c("V2", "V18", "V19", "V20", "V21", "V22", "V23", "V24", "V25") := NULL]
-HourlyPay2021 <- HourlyPay2021[, c("V2", "V18", "V19", "V20", "V21", "V22", "V23", "V24", "V25") := NULL]
-setnames(HoursWorked2021, c("V1", "V3", "V4", "V5", "V6", "V7", "V8", "V9", "V10", "V11", "V12", "V13", "V14", "V15", "V16", "V17"), c("Description", "Number of jobs","Median","Annual % change","Mean","Mean: Annual % change","10 percentile","20 percentile","25 percentile","30 percentile","40 percentile","50 percentile","60 percentile", "70 percentile","80 percentile","90 percentile"))
-setnames(AnnualPay2021, c("V1", "V3", "V4", "V5", "V6", "V7", "V8", "V9", "V10", "V11", "V12", "V13", "V14", "V15", "V16", "V17"), c("Description", "Number of jobs","Median","Annual % change","Mean","Mean: Annual % change","10 percentile","20 percentile","25 percentile","30 percentile","40 percentile","50 percentile","60 percentile", "70 percentile","80 percentile","90 percentile"))
-setnames(HourlyPay2021, c("V1", "V3", "V4", "V5", "V6", "V7", "V8", "V9", "V10", "V11", "V12", "V13", "V14", "V15", "V16", "V17"), c("Description", "Number of jobs","Median","Annual % change","Mean","Mean: Annual % change","10 percentile","20 percentile","25 percentile","30 percentile","40 percentile","50 percentile","60 percentile", "70 percentile","80 percentile","90 percentile"))
-
-AnnualPay2022 <- fread("Work Region Occupation SOC20 (2) Table 3.7a   Annual pay - Gross 2022.csv")
-HourlyPay2022 <- fread("Work Region Occupation SOC20 (2) Table 3.5a   Hourly pay - Gross 2022.csv")
-WeeklyPay2022 <- fread("Work Region Occupation SOC20 (2) Table 3.1a   Weekly pay - Gross 2022.csv")
-HoursWorked2022 <- fread("Work Region Occupation SOC20 (2) Table 3.9a   Paid hours worked - Total 2022.csv")
-
-HourlyPay2022 <- HourlyPay2022[, Date := "2022-01-01"]
-AnnualPay2022 <- AnnualPay2022[, Date := "2022-01-01"]
-WeeklyPay2022 <- WeeklyPay2022[, Date := "2022-01-01"]
-HoursWorked2022 <- HoursWorked2022[, Date := "2022-01-01"]
-
-HourlyPay2022 <- HourlyPay2022[6:438]
-AnnualPay2022 <- AnnualPay2022[6:438]
-WeeklyPay2022 <- WeeklyPay2022[6:438]
-HoursWorked2022 <- HoursWorked2022[6:438]
-
-setnames(WeeklyPay2022, c("V1", "V3", "V4", "V5", "V6", "V7", "V8", "V9", "V10", "V11", "V12", "V13", "V14", "V15", "V16", "V17"), c("Description", "Number of jobs","Median","Annual % change","Mean","Mean: Annual % change","10 percentile","20 percentile","25 percentile","30 percentile","40 percentile","50 percentile","60 percentile", "70 percentile","80 percentile","90 percentile"))
-WeeklyPay2022 <- WeeklyPay2022[, c("V2", "V18", "V19", "V20", "V21", "V22", "V23", "V24", "V25") := NULL]
-HoursWorked2022 <- HoursWorked2022[, c("V2", "V18", "V19", "V20", "V21", "V22", "V23", "V24", "V25") := NULL]
-AnnualPay2022 <- AnnualPay2022[, c("V2", "V18", "V19", "V20", "V21", "V22", "V23", "V24", "V25") := NULL]
-HourlyPay2022 <- HourlyPay2022[, c("V2", "V18", "V19", "V20", "V21", "V22", "V23", "V24", "V25") := NULL]
-setnames(HoursWorked2022, c("V1", "V3", "V4", "V5", "V6", "V7", "V8", "V9", "V10", "V11", "V12", "V13", "V14", "V15", "V16", "V17"), c("Description", "Number of jobs","Median","Annual % change","Mean","Mean: Annual % change","10 percentile","20 percentile","25 percentile","30 percentile","40 percentile","50 percentile","60 percentile", "70 percentile","80 percentile","90 percentile"))
-setnames(AnnualPay2022, c("V1", "V3", "V4", "V5", "V6", "V7", "V8", "V9", "V10", "V11", "V12", "V13", "V14", "V15", "V16", "V17"), c("Description", "Number of jobs","Median","Annual % change","Mean","Mean: Annual % change","10 percentile","20 percentile","25 percentile","30 percentile","40 percentile","50 percentile","60 percentile", "70 percentile","80 percentile","90 percentile"))
-setnames(HourlyPay2022, c("V1", "V3", "V4", "V5", "V6", "V7", "V8", "V9", "V10", "V11", "V12", "V13", "V14", "V15", "V16", "V17"), c("Description", "Number of jobs","Median","Annual % change","Mean","Mean: Annual % change","10 percentile","20 percentile","25 percentile","30 percentile","40 percentile","50 percentile","60 percentile", "70 percentile","80 percentile","90 percentile"))
-
-AnnualPay2023 <- fread("Work Region Occupation SOC20 (2) Table 3.7a   Annual pay - Gross 2023.csv")
-HourlyPay2023 <- fread("Work Region Occupation SOC20 (2) Table 3.5a   Hourly pay - Gross 2023.csv")
-WeeklyPay2023 <- fread("Work Region Occupation SOC20 (2) Table 3.1a   Weekly pay - Gross 2023.csv")
-HoursWorked2023 <- fread("Work Region Occupation SOC20 (2) Table 3.9a   Paid hours worked - Total 2023.csv")
-
-HourlyPay2023 <- HourlyPay2023[, Date := "2023-01-01"]
-AnnualPay2023 <- AnnualPay2023[, Date := "2023-01-01"]
-WeeklyPay2023 <- WeeklyPay2023[, Date := "2023-01-01"]
-HoursWorked2023 <- HoursWorked2023[, Date := "2023-01-01"]
-
-HourlyPay2023 <- HourlyPay2023[6:438]
-AnnualPay2023 <- AnnualPay2023[6:438]
-WeeklyPay2023 <- WeeklyPay2023[6:438]
-HoursWorked2023 <- HoursWorked2023[6:438]
-
-setnames(WeeklyPay2023, c("V1", "V3", "V4", "V5", "V6", "V7", "V8", "V9", "V10", "V11", "V12", "V13", "V14", "V15", "V16", "V17"), c("Description", "Number of jobs","Median","Annual % change","Mean","Mean: Annual % change","10 percentile","20 percentile","25 percentile","30 percentile","40 percentile","50 percentile","60 percentile", "70 percentile","80 percentile","90 percentile"))
-WeeklyPay2023 <- WeeklyPay2023[, c("V2", "V18", "V19", "V20", "V21", "V22", "V23", "V24", "V25") := NULL]
-HoursWorked2023 <- HoursWorked2023[, c("V2", "V18", "V19", "V20", "V21", "V22", "V23", "V24", "V25") := NULL]
-AnnualPay2023 <- AnnualPay2023[, c("V2", "V18", "V19", "V20", "V21", "V22", "V23", "V24", "V25") := NULL]
-HourlyPay2023 <- HourlyPay2023[, c("V2", "V18", "V19", "V20", "V21", "V22", "V23", "V24", "V25") := NULL]
-setnames(HoursWorked2023, c("V1", "V3", "V4", "V5", "V6", "V7", "V8", "V9", "V10", "V11", "V12", "V13", "V14", "V15", "V16", "V17"), c("Description", "Number of jobs","Median","Annual % change","Mean","Mean: Annual % change","10 percentile","20 percentile","25 percentile","30 percentile","40 percentile","50 percentile","60 percentile", "70 percentile","80 percentile","90 percentile"))
-setnames(AnnualPay2023, c("V1", "V3", "V4", "V5", "V6", "V7", "V8", "V9", "V10", "V11", "V12", "V13", "V14", "V15", "V16", "V17"), c("Description", "Number of jobs","Median","Annual % change","Mean","Mean: Annual % change","10 percentile","20 percentile","25 percentile","30 percentile","40 percentile","50 percentile","60 percentile", "70 percentile","80 percentile","90 percentile"))
-setnames(HourlyPay2023, c("V1", "V3", "V4", "V5", "V6", "V7", "V8", "V9", "V10", "V11", "V12", "V13", "V14", "V15", "V16", "V17"), c("Description", "Number of jobs","Median","Annual % change","Mean","Mean: Annual % change","10 percentile","20 percentile","25 percentile","30 percentile","40 percentile","50 percentile","60 percentile", "70 percentile","80 percentile","90 percentile"))
-
-AnnualPay2020Regions <- AnnualPay2020[c(1, 36, 71, 106, 141, 176, 211, 246, 281, 316, 351, 386, 421),]
-AnnualPay2021Regions <- AnnualPay2021[c(1, 37, 73, 109, 145, 181, 217, 253, 289, 325, 361, 397, 433),]
-AnnualPay2022Regions <- AnnualPay2022[c(1, 37, 73, 109, 145, 181, 217, 253, 289, 325, 361, 397, 433),]
-AnnualPay2023Regions <- AnnualPay2023[c(1, 37, 73, 109, 145, 181, 217, 253, 289, 325, 361, 397, 433),]
-
-WeeklyPay2020Regions <- WeeklyPay2020[c(1, 36, 71, 106, 141, 176, 211, 246, 281, 316, 351, 386, 421),]
-WeeklyPay2021Regions <- WeeklyPay2021[c(1, 37, 73, 109, 145, 181, 217, 253, 289, 325, 361, 397, 433),]
-WeeklyPay2022Regions <- WeeklyPay2022[c(1, 37, 73, 109, 145, 181, 217, 253, 289, 325, 361, 397, 433),]
-WeeklyPay2023Regions <- WeeklyPay2023[c(1, 37, 73, 109, 145, 181, 217, 253, 289, 325, 361, 397, 433),]
-
-HourlyPay2020Regions <- HourlyPay2020[c(1, 36, 71, 106, 141, 176, 211, 246, 281, 316, 351, 386, 421),]
-HourlyPay2021Regions <- HourlyPay2021[c(1, 37, 73, 109, 145, 181, 217, 253, 289, 325, 361, 397, 433),]
-HourlyPay2022Regions <- HourlyPay2022[c(1, 37, 73, 109, 145, 181, 217, 253, 289, 325, 361, 397, 433),]
-HourlyPay2023Regions <- HourlyPay2023[c(1, 37, 73, 109, 145, 181, 217, 253, 289, 325, 361, 397, 433),]
-
-HoursWorked2020Regions <- HoursWorked2020[c(1, 36, 71, 106, 141, 176, 211, 246, 281, 316, 351, 386, 421),]
-HoursWorked2021Regions <- HoursWorked2021[c(1, 37, 73, 109, 145, 181, 217, 253, 289, 325, 361, 397, 433),]
-HoursWorked2022Regions <- HoursWorked2022[c(1, 37, 73, 109, 145, 181, 217, 253, 289, 325, 361, 397, 433),]
-HoursWorked2023Regions <- HoursWorked2023[c(1, 37, 73, 109, 145, 181, 217, 253, 289, 325, 361, 397, 433),]
-
-WeeklyPay2024 <- fread("PROV - Work Region Occupation SOC20 (2) Table 3.1a   Weekly pay - Gross 2024.csv")
-HourlyPay2024 <- fread("PROV - Work Region Occupation SOC20 (2) Table 3.5a   Hourly pay - Gross 2024.csv")
-AnnualPay2024 <- fread("PROV - Work Region Occupation SOC20 (2) Table 3.7a   Annual pay - Gross 2024.csv")
-HoursWorked2024 <- fread("PROV - Work Region Occupation SOC20 (2) Table 3.9a   Paid hours worked - Total 2024.csv")
-
-#WeeklyPay2024 <- setnames(WeeklyPay2024, c("Description", "Number of jobs (thousands)", "Median", "Median annual % change", "Mean", "Mean annual % change", "10 percentile", "20 percentile", "25 percentile", "30 percentile", "40 percentile", "50 percentile", "60 percentile", "70 percentile", "80 percentile", "90 percentile", "Date"), c("Description", "Number of jobs","Median","Annual % change","Mean","Mean: Annual % change","10 percentile","20 percentile","25 percentile","30 percentile","40 percentile","50 percentile","60 percentile", "70 percentile","80 percentile","90 percentile", "Date"))
-#HourlyPay2024 <- setnames(HourlyPay2024, c("Description", "Number of jobs (thousands)", "Median", "Median annual % change", "Mean", "Mean annual % change", "10 percentile", "20 percentile", "25 percentile", "30 percentile", "40 percentile", "50 percentile", "60 percentile", "70 percentile", "80 percentile", "90 percentile", "Date"), c("Description", "Number of jobs","Median","Annual % change","Mean","Mean: Annual % change","10 percentile","20 percentile","25 percentile","30 percentile","40 percentile","50 percentile","60 percentile", "70 percentile","80 percentile","90 percentile", "Date"))
-#AnnualPay2024 <- setnames(AnnualPay2024, c("Description", "Number of jobs (thousands)", "Median", "Median annual % change", "Mean", "Mean annual % change", "10 percentile", "20 percentile", "25 percentile", "30 percentile", "40 percentile", "50 percentile", "60 percentile", "70 percentile", "80 percentile", "90 percentile", "Date"), c("Description", "Number of jobs","Median","Annual % change","Mean","Mean: Annual % change","10 percentile","20 percentile","25 percentile","30 percentile","40 percentile","50 percentile","60 percentile", "70 percentile","80 percentile","90 percentile", "Date"))
-#HoursWorked2024 <- setnames(HoursWorked2024, c("Description", "Number of jobs (thousands)", "Median", "Median annual % change", "Mean", "Mean annual % change", "10 percentile", "20 percentile", "25 percentile", "30 percentile", "40 percentile", "50 percentile", "60 percentile", "70 percentile", "80 percentile", "90 percentile", "Date"), c("Description", "Number of jobs","Median","Annual % change","Mean","Mean: Annual % change","10 percentile","20 percentile","25 percentile","30 percentile","40 percentile","50 percentile","60 percentile", "70 percentile","80 percentile","90 percentile", "Date"))
-
-#fwrite(HourlyPay2024, "PROV - Work Region Occupation SOC20 (2) Table 3.5a   Hourly pay - Gross 2024.csv")
-#fwrite(WeeklyPay2024, "PROV - Work Region Occupation SOC20 (2) Table 3.1a   Weekly pay - Gross 2024.csv")
-#fwrite(HoursWorked2024, "PROV - Work Region Occupation SOC20 (2) Table 3.9a   Paid hours worked - Total 2024.csv")
-#fwrite(AnnualPay2024, "PROV - Work Region Occupation SOC20 (2) Table 3.7a   Annual pay - Gross 2024.csv")
-
-RegionsAnnual2024 <- AnnualPay2024[c(1, 37, 73, 109, 145, 181, 217, 253, 289, 325, 361, 397, 433),]
-RegionsHoursWorked2024 <- HoursWorked2024[c(1, 37, 73, 109, 145, 181, 217, 253, 289, 325, 361, 397, 433),]
-RegionsHourly2024 <- HourlyPay2024[c(1, 37, 73, 109, 145, 181, 217, 253, 289, 325, 361, 397, 433),]
-RegionsWeekly2024 <- WeeklyPay2024[c(1, 37, 73, 109, 145, 181, 217, 253, 289, 325, 361, 397, 433),]
 
 abc <- merge(AnnualPay2020Regions, AnnualPay2021Regions, by = c("Date", "Description", "Number of jobs","Median","Annual % change","Mean","Mean: Annual % change","10 percentile","20 percentile","25 percentile","30 percentile","40 percentile","50 percentile","60 percentile", "70 percentile","80 percentile","90 percentile"), all = TRUE)
 def <- merge(AnnualPay2022Regions, AnnualPay2023Regions, by = c("Date", "Description", "Number of jobs","Median","Annual % change","Mean","Mean: Annual % change","10 percentile","20 percentile","25 percentile","30 percentile","40 percentile","50 percentile","60 percentile", "70 percentile","80 percentile","90 percentile"), all = TRUE)
 RegionsAnnualPay <- merge(abc, def, by = c("Date", "Description", "Number of jobs","Median","Annual % change","Mean","Mean: Annual % change","10 percentile","20 percentile","25 percentile","30 percentile","40 percentile","50 percentile","60 percentile", "70 percentile","80 percentile","90 percentile"), all = TRUE)
-RegionsAnnual2024[, Date:= as.Date(Date)]
-RegionsAnnualPay[, Date:= as.Date(Date)]
-RegionsAnnual2024[, `Mean: Annual % change`:= as.character(`Mean: Annual % change`)]
-RegionsAnnual2024[, `Annual % change`:= as.character(`Annual % change`)]
+
 RegionsAnnualPay <- merge(RegionsAnnualPay, RegionsAnnual2024, by = c("Date", "Description", "Number of jobs","Median","Annual % change","Mean","Mean: Annual % change","10 percentile","20 percentile","25 percentile","30 percentile","40 percentile","50 percentile","60 percentile", "70 percentile","80 percentile","90 percentile"), all = TRUE)
 
 abc <- merge(WeeklyPay2020Regions, WeeklyPay2021Regions, by = c("Date", "Description", "Number of jobs","Median","Annual % change","Mean","Mean: Annual % change","10 percentile","20 percentile","25 percentile","30 percentile","40 percentile","50 percentile","60 percentile", "70 percentile","80 percentile","90 percentile"), all = TRUE)
 def <- merge(WeeklyPay2022Regions, WeeklyPay2023Regions, by = c("Date", "Description", "Number of jobs","Median","Annual % change","Mean","Mean: Annual % change","10 percentile","20 percentile","25 percentile","30 percentile","40 percentile","50 percentile","60 percentile", "70 percentile","80 percentile","90 percentile"), all = TRUE)
 RegionsWeeklyPay <- merge(abc, def, by = c("Date", "Description", "Number of jobs","Median","Annual % change","Mean","Mean: Annual % change","10 percentile","20 percentile","25 percentile","30 percentile","40 percentile","50 percentile","60 percentile", "70 percentile","80 percentile","90 percentile"), all = TRUE)
-RegionsWeekly2024[, Date:= as.Date(Date)]
-RegionsWeeklyPay[, Date:= as.Date(Date)]
-RegionsWeekly2024[, `Mean: Annual % change`:= as.character(`Mean: Annual % change`)]
-RegionsWeekly2024[, `Annual % change`:= as.character(`Annual % change`)]
+
 RegionsWeeklyPay <- merge(RegionsWeeklyPay, RegionsWeekly2024, by = c("Date", "Description", "Number of jobs","Median","Annual % change","Mean","Mean: Annual % change","10 percentile","20 percentile","25 percentile","30 percentile","40 percentile","50 percentile","60 percentile", "70 percentile","80 percentile","90 percentile"), all = TRUE)
 
-
-HourlyPay2020Regions <- HourlyPay2020Regions[, "50 percentile":= as.character("50 percentile")]
-HourlyPay2021Regions <- HourlyPay2021Regions[, "50 percentile":= as.character("50 percentile")]
 abc <- merge(HourlyPay2020Regions, HourlyPay2021Regions, by = c("Date", "Description", "Number of jobs","Median","Annual % change","Mean","Mean: Annual % change","10 percentile","20 percentile","25 percentile","30 percentile","40 percentile","50 percentile","60 percentile", "70 percentile","80 percentile","90 percentile"), all = TRUE)
 def <- merge(HourlyPay2022Regions, HourlyPay2023Regions, by = c("Date", "Description", "Number of jobs","Median","Annual % change","Mean","Mean: Annual % change","10 percentile","20 percentile","25 percentile","30 percentile","40 percentile","50 percentile","60 percentile", "70 percentile","80 percentile","90 percentile"), all = TRUE)
 RegionsHourlyPay <- merge(abc, def, by = c("Date", "Description", "Number of jobs","Median","Annual % change","Mean","Mean: Annual % change","10 percentile","20 percentile","25 percentile","30 percentile","40 percentile","50 percentile","60 percentile", "70 percentile","80 percentile","90 percentile"), all = TRUE)
-RegionsHourly2024[, Date:= as.Date(Date)]
-RegionsHourlyPay[, Date:= as.Date(Date)]
-RegionsHourly2024[, `Mean: Annual % change`:= as.character(`Mean: Annual % change`)]
-RegionsHourly2024[, `Annual % change`:= as.character(`Annual % change`)]
-RegionsHourly2024[,Median := as.character(Median)]
+
 RegionsHourlyPay <- merge(RegionsHourlyPay, RegionsHourly2024, by = c("Date", "Description", "Number of jobs","Median","Annual % change","Mean","Mean: Annual % change","10 percentile","20 percentile","25 percentile","30 percentile","40 percentile","50 percentile","60 percentile", "70 percentile","80 percentile","90 percentile"), all = TRUE)
 
 abc <- merge(HoursWorked2020Regions, HoursWorked2021Regions, by = c("Date", "Description", "Number of jobs","Median","Annual % change","Mean","Mean: Annual % change","10 percentile","20 percentile","25 percentile","30 percentile","40 percentile","50 percentile","60 percentile", "70 percentile","80 percentile","90 percentile"), all = TRUE)
 def <- merge(HoursWorked2022Regions, HoursWorked2023Regions, by = c("Date", "Description", "Number of jobs","Median","Annual % change","Mean","Mean: Annual % change","10 percentile","20 percentile","25 percentile","30 percentile","40 percentile","50 percentile","60 percentile", "70 percentile","80 percentile","90 percentile"), all = TRUE)
 RegionsHoursWorked <- merge(abc, def, by = c("Date", "Description", "Number of jobs","Median","Annual % change","Mean","Mean: Annual % change","10 percentile","20 percentile","25 percentile","30 percentile","40 percentile","50 percentile","60 percentile", "70 percentile","80 percentile","90 percentile"), all = TRUE)
-RegionsHoursWorked2024[, Date:= as.Date(Date)]
-RegionsHoursWorked[, Date:= as.Date(Date)]
-RegionsHoursWorked2024[, `Mean: Annual % change`:= as.character(`Mean: Annual % change`)]
-RegionsHoursWorked2024[, `Annual % change`:= as.character(`Annual % change`)]
-RegionsHoursWorked2024[, Mean:= as.character(Mean)]
+
 RegionsHoursWorked <- merge(RegionsHoursWorked, RegionsHoursWorked2024, by = c("Date", "Description", "Number of jobs","Median","Annual % change","Mean","Mean: Annual % change","10 percentile","20 percentile","25 percentile","30 percentile","40 percentile","50 percentile","60 percentile", "70 percentile","80 percentile","90 percentile"), all = TRUE)
 
-fwrite(RegionsAnnualPay, "~/Documents/Documents - Ruby's MacBook Air/RAC Work/MotoringIndex/AnnualPaybyRegion.csv")
-fwrite(RegionsWeeklyPay, "~/Documents/Documents - Ruby's MacBook Air/RAC Work/MotoringIndex/WeeklyPaybyRegion.csv")
-fwrite(RegionsHourlyPay, "~/Documents/Documents - Ruby's MacBook Air/RAC Work/MotoringIndex/HourlyPaybyRegion.csv")
-fwrite(RegionsHoursWorked, "~/Documents/Documents - Ruby's MacBook Air/RAC Work/MotoringIndex/HoursWorkedbyRegion.csv")
+fwrite(RegionsAnnualPay, "~/Documents/Documents - Ruby's MacBook Air/RAC Work/MotoringIndex/table32020revised/AnnualPaybyRegion.csv")
+fwrite(RegionsWeeklyPay, "~/Documents/Documents - Ruby's MacBook Air/RAC Work/MotoringIndex/table32020revised/WeeklyPaybyRegion.csv")
+fwrite(RegionsHourlyPay, "~/Documents/Documents - Ruby's MacBook Air/RAC Work/MotoringIndex/table32020revised/HourlyPaybyRegion.csv")
+fwrite(RegionsHoursWorked, "~/Documents/Documents - Ruby's MacBook Air/RAC Work/MotoringIndex/table32020revised/HoursWorkedbyRegion.csv")
 
 
 
