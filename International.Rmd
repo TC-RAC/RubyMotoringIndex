@@ -10,142 +10,95 @@ library(ggplot2)
 library(patchwork)
 library(lubridate)
 ```
-
 ```{r}
-OECDStats <- fread("RubyMotoringIndex/OECDInternationalFatalities.csv")
+OECDStats <- fread("~/Documents/Documents - Ruby's MacBook Air/RAC Work/MotoringIndex/RubyMotoringIndex/OECDInternationalFatalities.csv")
 ```
 
 ```{r}
-unique(OECDStats$REF_AREA)
-unique(OECDStats$`Reference area`)
+OECDStats <- OECDStats[order(OBS_VALUE, decreasing = TRUE),]
+OECDStats <- OECDStats[, Reference := paste0(REF_AREA, "_", `Reference area`)]
 ```
 
-
+```{r}
+unique(OECDStats$Reference)
+```
+```{r}
+ggplot(data= OECDStats, aes(x = TIME_PERIOD , y= OBS_VALUE, colour = REF_AREA)) + geom_line() + theme_classic() + ylab("Fatalities") + xlab("Date")
+```
 ```{r}
 ggplot(data= OECDStats, aes(x = TIME_PERIOD , y= OBS_VALUE, colour = REF_AREA)) + 
-  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "GBR")) + 
-  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "LVA")) + 
   geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "SWE")) + 
-  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "HRV")) + 
-  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "ARM")) + 
-  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "MLT")) + 
-  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "TUR")) + 
+  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "GBR")) + 
+  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "MEX"))+ 
+  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "BIH")) +   theme_classic()+ ylab("Fatalities") + xlab("Date")
+
+ggplot(data= OECDStats, aes(x = TIME_PERIOD , y= OBS_VALUE, colour = REF_AREA)) + 
   geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "NOR")) + 
-  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "UKR")) + 
-  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "BEL")) + 
-  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "ROU")) + 
-  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "CZE")) + 
-  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "IRL")) + 
-  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "MKD")) + 
-  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "AZE")) + 
-  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "GEO")) + 
-  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "BIH")) + 
   geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "USA")) + 
-  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "FIN")) + 
-  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "FRA")) + 
+  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "CAN")) +   theme_classic()+ ylab("Fatalities") + xlab("Date")
+
+ggplot(data= OECDStats, aes(x = TIME_PERIOD , y= OBS_VALUE, colour = REF_AREA)) + 
   geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "AUS")) + 
-  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "MEX")) + 
-  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "NZL")) + 
-  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "LTU")) + 
-  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "SVN")) + 
-  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "ISR")) + 
-  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "ISL")) + 
-  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "CAN")) + 
-  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "POL")) + 
-  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "PRT")) + 
-  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "CHL")) + 
-  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "AUT")) + 
-  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "JPN")) + 
-  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "MDA")) + 
-  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "ESP")) + 
-  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "KOR")) + 
-  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "DNK")) + 
-  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "DEU")) + 
   geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "NLD")) + 
-  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "MNE")) + 
-  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "EST")) + 
-  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "HUN")) + 
-  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "CHE")) + 
-  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "BGR")) + 
+  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "FIN")) +   theme_classic()+ ylab("Fatalities") + xlab("Date")
+
+ggplot(data= OECDStats, aes(x = TIME_PERIOD , y= OBS_VALUE, colour = REF_AREA)) + 
+  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "JPN")) + 
+  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "ISL")) + 
+  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "CHE")) +   theme_classic()+ ylab("Fatalities") + xlab("Date")
+
+ggplot(data= OECDStats, aes(x = TIME_PERIOD , y= OBS_VALUE, colour = REF_AREA)) + 
+  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "MLT")) + 
+  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "IRL")) + 
+  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "DNK")) +   theme_classic()+ ylab("Fatalities") + xlab("Date")
+
+ggplot(data= OECDStats, aes(x = TIME_PERIOD , y= OBS_VALUE, colour = REF_AREA)) + 
+  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "NZL")) + 
+  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "FRA")) + 
+  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "DEU")) +   theme_classic()+ ylab("Fatalities") + xlab("Date")
+
+ggplot(data= OECDStats, aes(x = TIME_PERIOD , y= OBS_VALUE, colour = REF_AREA)) + 
+  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "ISR")) + 
+  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "AUT")) + 
+  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "BEL")) +   theme_classic()+ ylab("Fatalities") + xlab("Date")
+
+ggplot(data= OECDStats, aes(x = TIME_PERIOD , y= OBS_VALUE, colour = REF_AREA)) + 
+  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "TUR")) + 
   geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "GRC")) + 
-  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "LUX")) + 
-  theme_classic()
-```
+  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "MNE")) +   theme_classic()+ ylab("Fatalities") + xlab("Date")
 
+ggplot(data= OECDStats, aes(x = TIME_PERIOD , y= OBS_VALUE, colour = REF_AREA)) + 
+  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "HUN")) + 
+  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "ESP")) + 
+  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "POL")) +   theme_classic()+ ylab("Fatalities") + xlab("Date")
 
-```{r}
-ggplot(data= OECDStats, aes(x = TIME_PERIOD , y= OBS_VALUE, colour = `Reference area`)) + 
-  geom_line(data = subset(OECDStats, OECDStats$`Reference area` == "United Kingdom")) + 
-  geom_line(data = subset(OECDStats, OECDStats$`Reference area` == "Latvia")) + 
-  geom_line(data = subset(OECDStats, OECDStats$`Reference area` == "Sweden")) +   theme_classic() 
+ggplot(data= OECDStats, aes(x = TIME_PERIOD , y= OBS_VALUE, colour = REF_AREA)) + 
+  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "KOR")) + 
+  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "PRT")) + 
+  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "CZE")) +   theme_classic()+ ylab("Fatalities") + xlab("Date")
 
-ggplot(data= OECDStats, aes(x = TIME_PERIOD , y= OBS_VALUE, colour = `Reference area`)) + theme_classic() +
-  geom_line(data = subset(OECDStats, OECDStats$`Reference area` == "Croatia")) + 
-  geom_line(data = subset(OECDStats, OECDStats$`Reference area` == "Armenia")) + 
-  geom_line(data = subset(OECDStats, OECDStats$`Reference area` == "Malta"))
+ggplot(data= OECDStats, aes(x = TIME_PERIOD , y= OBS_VALUE, colour = REF_AREA)) + 
+  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "ROU")) + 
+  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "MKD")) + 
+  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "SVN")) +   theme_classic()+ ylab("Fatalities") + xlab("Date")
 
-ggplot(data= OECDStats, aes(x = TIME_PERIOD , y= OBS_VALUE, colour = `Reference area`)) + theme_classic() +
-  geom_line(data = subset(OECDStats, OECDStats$`Reference area` == "Türkiye")) + 
-  geom_line(data = subset(OECDStats, OECDStats$`Reference area` == "Norway")) + 
-  geom_line(data = subset(OECDStats, OECDStats$`Reference area` == "Ukraine"))
+ggplot(data= OECDStats, aes(x = TIME_PERIOD , y= OBS_VALUE, colour = REF_AREA)) + 
+  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "LVA")) + 
+  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "EST")) + 
+  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "CHL")) +   theme_classic()+ ylab("Fatalities") + xlab("Date")
 
-ggplot(data= OECDStats, aes(x = TIME_PERIOD , y= OBS_VALUE, colour = `Reference area`)) + theme_classic() +  geom_line(data = subset(OECDStats, OECDStats$`Reference area` == "Belgium")) + 
-  geom_line(data = subset(OECDStats, OECDStats$`Reference area` == "Romania")) + 
-  geom_line(data = subset(OECDStats, OECDStats$`Reference area` == "Czechia"))
+ggplot(data= OECDStats, aes(x = TIME_PERIOD , y= OBS_VALUE, colour = REF_AREA)) + 
+  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "GEO")) + 
+  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "AZE")) + 
+  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "ARM")) +   theme_classic()+ ylab("Fatalities") + xlab("Date")
 
-ggplot(data= OECDStats, aes(x = TIME_PERIOD , y= OBS_VALUE, colour = `Reference area`)) + theme_classic() +   geom_line(data = subset(OECDStats, OECDStats$`Reference area` == "Ireland")) + 
-  geom_line(data = subset(OECDStats, OECDStats$`Reference area` == "North Macedonia")) + 
-  geom_line(data = subset(OECDStats, OECDStats$`Reference area` == "Azerbaijan"))
+ggplot(data= OECDStats, aes(x = TIME_PERIOD , y= OBS_VALUE, colour = REF_AREA)) + 
+  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "MDA")) + 
+  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "UKR")) + 
+  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "LUX")) +   theme_classic()+ ylab("Fatalities") + xlab("Date")
 
-ggplot(data= OECDStats, aes(x = TIME_PERIOD , y= OBS_VALUE, colour = `Reference area`)) + theme_classic() +  
-  geom_line(data = subset(OECDStats, OECDStats$`Reference area` == "Georgia")) + 
-  geom_line(data = subset(OECDStats, OECDStats$`Reference area` == "Bosnia and Herzegovina")) + 
-  geom_line(data = subset(OECDStats, OECDStats$`Reference area` == "United States"))
-
-ggplot(data= OECDStats, aes(x = TIME_PERIOD , y= OBS_VALUE, colour = `Reference area`)) + theme_classic() +  
-  geom_line(data = subset(OECDStats, OECDStats$`Reference area` == "Finland")) + 
-  geom_line(data = subset(OECDStats, OECDStats$`Reference area` == "France")) + 
-  geom_line(data = subset(OECDStats, OECDStats$`Reference area` == "Australia"))
-
-ggplot(data= OECDStats, aes(x = TIME_PERIOD , y= OBS_VALUE, colour = `Reference area`)) + theme_classic() +  
-  geom_line(data = subset(OECDStats, OECDStats$`Reference area` == "Mexico")) + 
-  geom_line(data = subset(OECDStats, OECDStats$`Reference area` == "New Zealand")) + 
-  geom_line(data = subset(OECDStats, OECDStats$`Reference area` == "Lithuania"))
-
-ggplot(data= OECDStats, aes(x = TIME_PERIOD , y= OBS_VALUE, colour = `Reference area`)) + theme_classic() +  
- geom_line(data = subset(OECDStats, OECDStats$`Reference area` == "Slovenia")) + 
-  geom_line(data = subset(OECDStats, OECDStats$`Reference area` == "Israel")) + 
-  geom_line(data = subset(OECDStats, OECDStats$`Reference area` == "Iceland"))
-
-ggplot(data= OECDStats, aes(x = TIME_PERIOD , y= OBS_VALUE, colour = `Reference area`)) + theme_classic() +  
-   geom_line(data = subset(OECDStats, OECDStats$`Reference area` == "Chile")) + 
-  geom_line(data = subset(OECDStats, OECDStats$`Reference area` == "Austria")) + 
-  geom_line(data = subset(OECDStats, OECDStats$`Reference area` == "Japan"))
-
-ggplot(data= OECDStats, aes(x = TIME_PERIOD , y= OBS_VALUE, colour = `Reference area`)) + theme_classic() +  
-   geom_line(data = subset(OECDStats, OECDStats$`Reference area` == "Canada")) + 
-  geom_line(data = subset(OECDStats, OECDStats$`Reference area` == "Poland")) + 
-  geom_line(data = subset(OECDStats, OECDStats$`Reference area` == "Portugal"))
-   
-   
-ggplot(data= OECDStats, aes(x = TIME_PERIOD , y= OBS_VALUE, colour = `Reference area`)) + theme_classic() +  
-  geom_line(data = subset(OECDStats, OECDStats$`Reference area` == "Moldova")) + 
-  geom_line(data = subset(OECDStats, OECDStats$`Reference area` == "Spain")) + 
-  geom_line(data = subset(OECDStats, OECDStats$`Reference area` == "Korea"))
-
-ggplot(data= OECDStats, aes(x = TIME_PERIOD , y= OBS_VALUE, colour = `Reference area`)) + theme_classic() +  
-    geom_line(data = subset(OECDStats, OECDStats$`Reference area` == "Denmark")) + 
-  geom_line(data = subset(OECDStats, OECDStats$`Reference area` == "Germany")) + 
-  geom_line(data = subset(OECDStats, OECDStats$`Reference area` == "Netherlands"))
-
-ggplot(data= OECDStats, aes(x = TIME_PERIOD , y= OBS_VALUE, colour = `Reference area`)) + theme_classic() +  
-      geom_line(data = subset(OECDStats, OECDStats$`Reference area` == "Montenegro")) + 
-  geom_line(data = subset(OECDStats, OECDStats$`Reference area` == "Estonia")) + 
-  geom_line(data = subset(OECDStats, OECDStats$`Reference area` == "Hungary"))
-
-ggplot(data= OECDStats, aes(x = TIME_PERIOD , y= OBS_VALUE, colour = `Reference area`)) + theme_classic() +  
-        geom_line(data = subset(OECDStats, OECDStats$`Reference area` == "Switzerland")) + 
-  geom_line(data = subset(OECDStats, OECDStats$`Reference area` == "Bulgaria")) + 
-  geom_line(data = subset(OECDStats, OECDStats$`Reference area` == "Greece")) + 
-  geom_line(data = subset(OECDStats, OECDStats$`Reference area` == "Luxembourg")) 
+ggplot(data= OECDStats, aes(x = TIME_PERIOD , y= OBS_VALUE, colour = REF_AREA)) + 
+  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "HRV")) + 
+  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "LTU")) + 
+  geom_line(data = subset(OECDStats, OECDStats$REF_AREA == "BGR")) +   theme_classic()+ ylab("Fatalities") + xlab("Date")
 ```
