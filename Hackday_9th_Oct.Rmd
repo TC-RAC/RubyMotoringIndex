@@ -48,7 +48,7 @@ CasualtybyYear <- CasualtybyYear[, "KSI" := Fatalities + `Serious Injuries`]
 TotalMilesDriven <- TotalMilesDriven[, Months := month(`Year ending [note 1]`, label = TRUE)]
 TotalMilesDriven <- subset(TotalMilesDriven, TotalMilesDriven$Months == "Dec")
 TotalMilesDriven <- TotalMilesDriven[,`Year ending [note 1]` := year(`Year ending [note 1]`)]
-TotalMilesDriven[, c("Notes", "Cars and Taxis", "Light Commercial Vehicles [note 3]", "Heavy Goods Vehicles [note 4]", "Other Vehicles [note 5]", "Months") := NULL]
+TotalMilesDriven[, c("Cars and Taxis", "Light Commercial Vehicles [note 3]", "Heavy Goods Vehicles [note 4]", "Other Vehicles [note 5]", "Months") := NULL]
 TotalMilesDriven <- merge(TotalMilesDriven, CasualtybyYear, by.x = "Year ending [note 1]" , by.y = "accident_year", all= TRUE)
 TotalMilesDriven <- TotalMilesDriven[16:45]
 TotalMilesDriven <- TotalMilesDriven[, FatalityRate := Fatalities / `All Motor Vehicles`]
