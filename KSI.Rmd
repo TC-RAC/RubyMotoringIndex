@@ -20,86 +20,70 @@ AdjustedStats <- fread("dft-road-casualty-statistics-casualty-adjustment-lookup_
 TotalMilesDriven <- fread("~/Documents/Documents - Ruby's MacBook Air/RAC Work/MotoringIndex/tra0101-miles-by-vehicle-type.csv")
 ```
 ```{r}
-DftStats2 <- merge(dfst
-                   )
+DftStats2 <- merge(AdjustedStats, DftStats1, by = c("accident_index", "accident_year", "accident_reference", "vehicle_reference", "casualty_reference"), all = TRUE)
 ```
-
 
 ```{r}
-DftStats1 <- DftStats1[, c("sex_of_casualty", "age_of_casualty", "age_band_of_casualty", "pedestrian_location", "pedestrian_movement", "pedestrian_road_maintenance_worker", "casualty_home_area_type", "casualty_distance_banding", "casualty_imd_decile", "casualty_class", "car_passenger", "bus_or_coach_passenger", "casualty_type", "lsoa_of_casualty", "accident_reference", "vehicle_reference") := NULL]
-AdjustedStats <- AdjustedStats[, c("accident_reference", "vehicle_reference", "casualty_reference"):= NULL]
+DftStats2 <- DftStats2[, c("accident_index", "accident_reference", "vehicle_reference", "casualty_reference", "sex_of_casualty", "age_of_casualty", "age_band_of_casualty", "pedestrian_location", "pedestrian_movement", "pedestrian_road_maintenance_worker", "casualty_home_area_type", "casualty_distance_banding", "casualty_imd_decile", "car_passenger", "bus_or_coach_passenger", "lsoa_of_casualty", "injury_based") := NULL]
+rm(DftStats1, AdjustedStats)
+TotalMilesDriven <- TotalMilesDriven[, c("Cars and Taxis", "Light commercial vehicles", "Heavy goods vehicles", "Other vehicles: Motorcycles", "Other vehicles: Buses and Coaches", "Total other vehicles"):=NULL]
 ```
 
-
+```{r}
+setnames(DftStats2, "accident_year", "Year")
+Total <- merge(DftStats2, TotalMilesDriven, by="Year", all = TRUE)
+```
 #Formatting
 ```{r}
-DftStats2004 <- DftStats1[accident_year >= 2004,]
-DftStats2004 <- DftStats2004[casualty_severity < 3,]
-DftStats1[, accident_reference, accident_year]
-```
-
-```{r}
-AdjustedStats <- merge(AdjustedStats, DftStats1, by = c("accident_index", ), all = TRUE)
-rm(DftStats2004)
-```
-
-```{r}
-CasualtybyYear <- DftStats1[,.N, keyby = c("accident_year", "casualty_severity")]
-xyz <- subset(CasualtybyYear, CasualtybyYear$casualty_severity == "1")
-abc <- subset(CasualtybyYear, CasualtybyYear$casualty_severity == "2")
-CasualtybyYear <- merge(xyz, abc, by = "accident_year", all = TRUE)
+CasualtybyYear <- DftStats2[,.N, keyby = c("Year", "casualty_severity")]
+CasualtybyYear <- merge(subset(CasualtybyYear, CasualtybyYear$casualty_severity == "1"), subset(CasualtybyYear, CasualtybyYear$casualty_severity == "2"), by = "Year", all = TRUE)
 setnames(CasualtybyYear, c("N.x", "N.y"), c("Fatalities", "Serious Injuries"))
 CasualtybyYear[, c("casualty_severity.x", "casualty_severity.y") := NULL]
-rm(xyz)
-rm(abc)
 CasualtybyYear <- CasualtybyYear[, "KSI" := Fatalities + `Serious Injuries`]
 ```
 
 ```{r}
-TotalMilesDriven <- TotalMilesDriven[, Months := month(`Year ending [note 1]`, label = TRUE)]
-TotalMilesDriven <- subset(TotalMilesDriven, TotalMilesDriven$Months == "Dec")
-TotalMilesDriven <- TotalMilesDriven[,`Year ending [note 1]` := year(`Year ending [note 1]`)]
-TotalMilesDriven[, c("Cars and Taxis", "Light Commercial Vehicles [note 3]", "Heavy Goods Vehicles [note 4]", "Other Vehicles [note 5]", "Months") := NULL]
-TotalMilesDriven <- merge(TotalMilesDriven, CasualtybyYear, by.x = "Year ending [note 1]" , by.y = "accident_year", all= TRUE)
-TotalMilesDriven <- TotalMilesDriven[16:45]
+TotalMilesDriven <- merge(TotalMilesDriven, CasualtybyYear, by = "Year", all= TRUE)
 TotalMilesDriven <- TotalMilesDriven[, FatalityRate := Fatalities / `All Motor Vehicles`]
 TotalMilesDriven <- TotalMilesDriven[, CasualtyRate := `Serious Injuries` / `All Motor Vehicles`]
 TotalMilesDriven <- TotalMilesDriven[, KSIRate := KSI / `All Motor Vehicles`]
+TotalMilesDriven <- TotalMilesDriven[!is.na(Fatalities),]
 ```
 
 #Graphs
 ```{r}
 ggplot() +
-  geom_line(data = CasualtybyYear, aes(x = accident_year, y= Fatalities ,colour = "Fatality (killed)") ) +
-  geom_line(data = CasualtybyYear, aes(x = accident_year, y = `Serious Injuries` , colour = "Casualty (Serious injury)")) +
-  theme_classic() + ylab("Totals") + scale_color_manual("Casuality severity levels", values = CasualtyColours) + xlab("End of year")
+  geom_line(data = CasualtybyYear, aes(x = Year, y= Fatalities ,colour = "Fatality (killed)") ) +
+  geom_line(data = CasualtybyYear, aes(x = Year, y = `Serious Injuries` , colour = "Casualty (Serious injury)")) +
+  theme_classic() + ylab("Totals") + scale_color_manual("Casuality severity levels", values = CasualtyColours) + xlab("End of year")+ scale_x_continuous(expand=c(0,0)) + scale_y_continuous(expand=c(0,0))+
+  theme(legend.position = "bottom", legend.title.position = "top", legend.text.position = "bottom")
 ```
 
 
 ```{r}
-ggplot(data= CasualtybyYear, aes(x= accident_year, y = KSI, colour = "Fatality or casualty (killed or seriously injured)")) + geom_line()+ theme_classic() + ggtitle("Annual KSI's") + ylab("Totals") + 
-  scale_color_manual("Casuality severity levels", values = CasualtyColours) + xlab("End of year")
+ggplot(data= CasualtybyYear, aes(x= Year, y = KSI, colour = "Fatality or casualty (killed or seriously injured)")) + geom_line()+ theme_classic() + ggtitle("Annual KSI's") + ylab("Totals") + 
+  scale_color_manual("Casuality severity levels", values = CasualtyColours) + xlab("End of year")+ scale_x_continuous(expand=c(0,0)) + scale_y_continuous(expand=c(0,0))+
+  theme(legend.position = "bottom", legend.title.position = "top", legend.text.position = "bottom")
 ```
 #Graphs by miles driven
 ```{r}
 ggplot() + 
-  geom_line(data = TotalMilesDriven, aes(y = KSIRate, x= `Year ending [note 1]`, colour = "Fatality or casualty (killed or seriously injured)"))+
+  geom_line(data = TotalMilesDriven, aes(y = KSIRate, x= Year, colour = "Fatality or casualty (killed or seriously injured)"))+
   theme_classic() + 
   ggtitle("Fatalities and serious injuries per one billion motor vehicle miles") + ylab("Rate") + 
   scale_color_manual("Casuality severity levels", values = CasualtyColours) +
-  theme(legend.position = "bottom", legend.title.position = "top", legend.text.position = "bottom") + xlab("End of year") 
+  theme(legend.position = "bottom", legend.title.position = "top", legend.text.position = "bottom") + xlab("End of year") + scale_x_continuous(expand=c(0,0)) + scale_y_continuous(expand=c(0,0))
 ```
 KSIPlot <- 
 ```{r}
 ggplot() + 
-  geom_line(data = TotalMilesDriven, aes(y = FatalityRate, x= `Year ending [note 1]`, colour = "Fatality (killed)", linetype = "Fatality (killed)")) + 
-  geom_line(data = TotalMilesDriven, aes(y = CasualtyRate, x= `Year ending [note 1]`, colour = "Casualty (Serious injury)", linetype = "Casualty (Serious injury)")) + 
-  geom_line(data = TotalMilesDriven, aes(y = KSIRate, x= `Year ending [note 1]`, colour = "Fatality or casualty (killed or seriously injured)", linetype = "Fatality or casualty (killed or seriously injured)"))+
+  geom_line(data = TotalMilesDriven, aes(y = FatalityRate, x= Year, colour = "Fatality (killed)", linetype = "Fatality (killed)")) + 
+  geom_line(data = TotalMilesDriven, aes(y = CasualtyRate, x= Year, colour = "Casualty (Serious injury)", linetype = "Casualty (Serious injury)")) + 
+  geom_line(data = TotalMilesDriven, aes(y = KSIRate, x= Year, colour = "Fatality or casualty (killed or seriously injured)", linetype = "Fatality or casualty (killed or seriously injured)"))+
   theme_classic() + 
   ggtitle("Fatalities and serious injuries per one billion motor vehicle miles travelled") + ylab("Rate") + 
   scale_color_manual("Casuality Severity Levels", values = CasualtyColours) + xlab("End of year") + scale_linetype_manual("Casuality Severity Levels", values = CasualtyLines)+
-  theme(legend.position = "bottom", legend.title.position = "top", legend.text.position = "bottom")
-
+  theme(legend.position = "bottom", legend.title.position = "top", legend.text.position = "bottom") + scale_x_continuous(expand=c(0,0)) + scale_y_continuous(expand=c(0,0))
 ```
 ggsave("KSIPlot.pdf")
 #Notes
@@ -115,3 +99,4 @@ MonthlyRPI2003 <- MonthlyRPI2003[, Title := seq(as.Date("2003-06-01"), as.Date("
 WeeklyFuelData <- WeeklyFuelData[, MonthYear := paste0(month(Date, label = TRUE), year(Date))]
 
 1 = fatality, 2 = serious
+
