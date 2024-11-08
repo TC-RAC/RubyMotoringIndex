@@ -11,7 +11,7 @@ library(patchwork)
 library(lubridate)
 ```
 ```{r}
-OECDStats <- fread("~/Documents/Documents - Ruby's MacBook Air/RAC Work/MotoringIndex/RubyMotoringIndex/OECDInternationalFatalities.csv")
+OECDStats <- fread("OECDInternationalFatalities.csv")
 ```
 
 ```{r}

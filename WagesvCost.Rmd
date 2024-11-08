@@ -14,10 +14,10 @@ library(patchwork)
 ```{r}
 ppermile <- fread("finalppm.csv")
 Wages <- fread("Wages.csv")
-HoursWorked <- fread("~/Documents/Documents - Ruby's MacBook Air/RAC Work/MotoringIndex/table32020revised/HoursWorkedbyRegion.csv")
-HourlyPay <- fread("~/Documents/Documents - Ruby's MacBook Air/RAC Work/MotoringIndex/table32020revised/HourlyPaybyRegion.csv")
-AnnualPay <- fread("~/Documents/Documents - Ruby's MacBook Air/RAC Work/MotoringIndex/table32020revised/AnnualPaybyRegion.csv")
-WeeklyPay <- fread("~/Documents/Documents - Ruby's MacBook Air/RAC Work/MotoringIndex/table32020revised/WeeklyPaybyRegion.csv")
+HoursWorked <- fread("table32020revised/HoursWorkedbyRegion.csv")
+HourlyPay <- fread("table32020revised/HourlyPaybyRegion.csv")
+AnnualPay <- fread("table32020revised/AnnualPaybyRegion.csv")
+WeeklyPay <- fread("table32020revised/WeeklyPaybyRegion.csv")
 EarningsandHours <- fread("EarningsandHours.csv")
 ```
 

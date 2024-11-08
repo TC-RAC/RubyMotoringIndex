@@ -10,14 +10,13 @@ library(data.table)
 library(ggplot2)
 library(patchwork)
 library(lubridate)
-setwd("~/Documents/Documents - Ruby's MacBook Air/RAC Work/MotoringIndex/RubyMotoringIndex")
 ```
 
 #Read files
 ```{r}
 DftStats1 <- fread("dft-road-casualty-statistics-casualty-1979-latest-published-year.csv")
 AdjustedStats <- fread("dft-road-casualty-statistics-casualty-adjustment-lookup_2004-latest-published-year.csv")
-TotalMilesDriven <- fread("~/Documents/Documents - Ruby's MacBook Air/RAC Work/MotoringIndex/tra0101-miles-by-vehicle-type.csv")
+TotalMilesDriven <- fread("tra0101-miles-by-vehicle-type.csv")
 ```
 ```{r}
 DftStats2 <- merge(AdjustedStats, DftStats1, by = c("accident_index", "accident_year", "accident_reference", "vehicle_reference", "casualty_reference"), all = TRUE)
