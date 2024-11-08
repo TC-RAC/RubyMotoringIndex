@@ -16,6 +16,10 @@ library(lubridate)
 ```{r}
 DftStats1 <- fread("dft-road-casualty-statistics-casualty-1979-latest-published-year.csv")
 AdjustedStats <- fread("dft-road-casualty-statistics-casualty-adjustment-lookup_2004-latest-published-year.csv")
+```
+
+
+```{r}
 TotalMilesDriven <- fread("tra0101-miles-by-vehicle-type.csv")
 ```
 ```{r}
